@@ -1,0 +1,10 @@
+# ROS 2 build directories
+build/
+install/
+log/
+
+# Python cache & temporary files
+__pycache__/
+*.pyc
+*.swp
+.DS_Store

@@ -1,0 +1,28 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    use_sim_time: true
+
+    robot_description:
+      topic: /robot_description
+
+    # Publishes /joint_states from the simulated joints
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Controls the arm joints (just joint1 for now)
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# ---- Arm controller config ----
+arm_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
