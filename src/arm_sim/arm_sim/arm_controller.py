@@ -28,9 +28,10 @@ MOVE_TIME = 0.3    # s to reach each new target
 # Order here MUST match the 'joints:' list in controllers.yaml
 JOINTS = [
     # name,      lower,  upper,  key_neg, key_pos
-    ('joint1',   -1.57,   1.57,   'a',     's'),
-    ('joint2',   -1.57,   1.57,   'd',     'f'),
-    ('joint3',   -1.57,   1.57,   'g',     'h'),
+    ('joint1',   -1.57,   1.57,   'q',     'w'),
+    ('joint2',   -1.57,   1.57,   'e',     'r'),
+    ('joint3',   -1.57,   1.57,   't',     'y'),
+    ('gripper_joint',   -1.57,   1.57,   'u',     'i'),
 ]
 
 JOINT_NAMES = [j[0] for j in JOINTS]
@@ -41,10 +42,11 @@ for i, (_, _, _, kn, kp) in enumerate(JOINTS):
 
 HELP = """
 ============== joint1 + joint2 STEP control ==============
-  a / d : joint1  negative / positive
-  j / l : joint2  negative / positive
-  x     : both joints to zero
-  q     : quit
+  q / w : joint1  negative / positive
+  e / r : joint2  negative / positive
+  t / y : joint3  negative / positive
+  u / i : gripper_joint  negative / positive
+  x     : all the joints to zero
 ----------------------------------------------------------
   Each tap moves that joint by {step} rad.
 ==========================================================
@@ -96,7 +98,7 @@ def main():
         while rclpy.ok():
             key = get_key(0.1)
 
-            if key in ('q', '\x03'):                      # q or Ctrl-C
+            if key == '\x03':                      # Ctrl-C
                 break
             elif key == 'x':
                 node.targets = [0.0] * len(JOINTS)
