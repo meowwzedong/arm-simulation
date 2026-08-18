@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!--
+  A small cube sized for the arm_sim gripper.
+
+  Sizing: the tooth frames sit 26.85 mm apart and each tooth is 3.0 mm thick,
+  leaving a 23.85 mm jaw gap when both prismatic joints are at 0. A 15 mm cube
+  therefore needs (23.85 - 15) / 2 = 4.42 mm of travel per jaw to close on it,
+  comfortably inside the 0..15 mm joint limit.
+
+  Mass is kept low (20 g) so the light links can lift it, and friction is high to
+  match the teeth. maxVel=0 / minDepth=1mm are the standard Gazebo Classic
+  settings for a grasp that does not squirt out of the gripper.
+
+  Spawn with:
+    ros2 run gazebo_ros spawn_entity.py -entity graspable_box \
+      -file $(ros2 pkg prefix arm_sim)/share/arm_sim/models/graspable_box.sdf \
+      -x 0.10 -y 0.0 -z 0.0075
+-->
+<sdf version="1.6">
+  <model name="box">
+    <link name="link">
+
+      <inertial>
+        <mass>0.02</mass>
+        <!-- solid cube, a = 0.015 m:  I = m * (a^2 + a^2) / 12 -->
+        <inertia>
+          <ixx>7.5000E-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.5000E-07</iyy>
+          <iyz>0</iyz>
+          <izz>7.5000E-07</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.015 0.015 0.015</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>3.0</mu>
+              <mu2>3.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>1.0</kd>
+              <min_depth>0.001</min_depth>
+              <max_vel>0.0</max_vel>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.015 0.015 0.015</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.9 1</diffuse>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

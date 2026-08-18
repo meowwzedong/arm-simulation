@@ -21,7 +21,10 @@ arm_controller:
       - joint1
       - joint2
       - joint3
-      - gripper_joint
+      - joint4
+      - joint5
+      - right_tooth_joint
+      - left_tooth_joint
     command_interfaces:
       - position
     state_interfaces:

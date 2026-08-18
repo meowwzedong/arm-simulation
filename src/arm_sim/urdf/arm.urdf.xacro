@@ -1,185 +1,488 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="three_link_arm">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="pi" value="3.14159265359"/>
-
-  <!-- ===== MATERIALS (for RViz) ===== -->
-  <material name="gray">
-    <color rgba="0.5 0.5 0.5 1.0"/>
-  </material>
-  <material name="blue">
-    <color rgba="0.0 0.0 1.0 1.0"/>
-  </material>
-  <material name="red">
-    <color rgba="1.0 0.0 0.0 1.0"/>
-  </material>
-  <material name="green">
-    <color rgba="0.0 1.0 0.0 1.0"/>
-  </material>
-  <material name="yellow">
-    <color rgba="1.0 1.0 0.0 1.0"/>
-  </material>
-
-  <!-- ===== WORLD + FIXED BASE ===== -->
   <link name="world"/>
 
-    <link name="base_link">
+  <link
+    name="base_link">
     <inertial>
-      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
-      <mass value="5.0"/>
-      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+      <origin
+        xyz="-1.0639E-18 0 0.0225"
+        rpy="0 0 0" />
+      <mass
+        value="0.05768" />
+      <inertia
+        ixx="1.5501E-05"
+        ixy="0"
+        ixz="-1.9481E-37"
+        iyy="1.5501E-05"
+        iyz="-5.0159E-38"
+        izz="1.1536E-05" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/base.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/base_link.STL" />
       </geometry>
-      <material name="gray"/>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/base.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
 
-  <!-- FIRST joint: fixed (anchors base to the world) -->
   <joint name="world_to_base" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
-    <origin xyz="-0.05 -0.05 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
-  <!-- ===== LINK 1 ===== -->
-  <link name="link1">
+  <link
+    name="link1">
     <inertial>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
-      <mass value="1.5"/>
-      <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.01"/>
+      <origin
+        xyz="-4.0978E-19 -9.8755E-18 0.0025911"
+        rpy="0 0 0" />
+      <mass
+        value="0.0086396" />
+      <inertia
+        ixx="1.0316E-06"
+        ixy="-1.4108E-23"
+        ixz="1.4E-23"
+        iyy="1.2174E-06"
+        iyz="-1.4338E-21"
+        izz="1.6687E-06" />
     </inertial>
     <visual>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link1.STL" />
       </geometry>
-      <material name="blue"/>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link1.STL" />
       </geometry>
     </collision>
   </link>
 
-  <!-- SECOND joint: REVOLUTE -->
-  <joint name="joint1" type="revolute">
-    <parent link="base_link"/>
-    <child link="link1"/>
-    <origin xyz="0.05 0.05 0.061" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="${-pi/2}" upper="${pi/2}" effort="10.0" velocity="1.0"/>
-    <dynamics damping="0.1" friction="0.1"/>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0475"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
   </joint>
-
-  <!-- ===== LINK 2 ===== -->
-  <link name="link2">
+  <link
+    name="link2">
     <inertial>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
-      <mass value="1.5"/>
-      <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.01"/>
+      <origin
+        xyz="-0.026754 -0.00028438 2.3123E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.014541" />
+      <inertia
+        ixx="1.2234E-06"
+        ixy="-2.0157E-08"
+        ixz="1.9988E-22"
+        iyy="3.1196E-06"
+        iyz="6.8418E-23"
+        izz="2.8107E-06" />
     </inertial>
     <visual>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link2.STL" />
       </geometry>
-      <material name="red"/>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link2.STL" />
       </geometry>
     </collision>
   </link>
-
-  <!-- THIRD joint: REVOLUTE -->
-  <joint name="joint2" type="revolute">
-    <parent link="link1"/>
-    <child link="link2"/>
-    <origin xyz="0 0 0.061" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="${-pi/2}" upper="${pi/2}" effort="10.0" velocity="1.0"/>
-    <dynamics damping="0.1" friction="0.1"/>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0135"
+      rpy="0 1.5708 0" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
   </joint>
-
-  <!-- ===== LINK 3 ===== -->
-  <link name="link3">
+  <link
+    name="link3">
     <inertial>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
-      <mass value="1.5"/>
-      <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.01"/>
+      <origin
+        xyz="-0.026754 -0.00028438 5.7937E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.014541" />
+      <inertia
+        ixx="1.2234E-06"
+        ixy="-2.0157E-08"
+        ixz="2.811E-22"
+        iyy="3.1196E-06"
+        iyz="-6.1017E-23"
+        izz="2.8107E-06" />
     </inertial>
     <visual>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link3.STL" />
       </geometry>
-      <material name="green"/>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/link.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link3.STL" />
       </geometry>
     </collision>
   </link>
-
-  <!-- THIRD joint: REVOLUTE -->
-  <joint name="joint3" type="revolute">
-    <parent link="link2"/>
-    <child link="link3"/>
-    <origin xyz="0 0 0.061" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="${-pi/2}" upper="${pi/2}" effort="10.0" velocity="1.0"/>
-    <dynamics damping="0.1" friction="0.1"/>
+  <joint
+    name="joint3"
+    type="revolute">
+    <origin
+      xyz="-0.060997 -0.00064835 0"
+      rpy="0 0 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
   </joint>
-
-  <!-- ===== gripper ===== -->
-  <link name="gripper">
+  <link
+    name="link4">
     <inertial>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
-      <mass value="1"/>
-      <inertia ixx="0.0333" ixy="0.0" ixz="0.0" iyy="0.0333" iyz="0.0" izz="0.006667"/>
+      <origin
+        xyz="-0.026754 -0.00028438 -8.1317E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.014541" />
+      <inertia
+        ixx="1.2234E-06"
+        ixy="-2.0157E-08"
+        ixz="-9.1835E-23"
+        iyy="3.1196E-06"
+        iyz="-3.0904E-24"
+        izz="2.8107E-06" />
     </inertial>
     <visual>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/gripper.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link4.STL" />
       </geometry>
-      <material name="green"/>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="-0.01 -0.013 -0.01" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://arm_sim/meshes/gripper.STL" scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://arm_sim/meshes/link4.STL" />
       </geometry>
     </collision>
   </link>
-
-  <!-- THIRD joint: REVOLUTE -->
-  <joint name="gripper_joint" type="revolute">
-    <parent link="link3"/>
-    <child link="gripper"/>
-    <origin xyz="0 0 0.061" rpy="0 ${-pi/2} 0"/>
-    <axis xyz="0 1 0"/>
-    <limit lower="${-pi/2}" upper="${pi/2}" effort="10.0" velocity="1.0"/>
-    <dynamics damping="0.1" friction="0.1"/>
+  <joint
+    name="joint4"
+    type="revolute">
+    <origin
+      xyz="-0.060997 -0.00064835 0"
+      rpy="0 0 0" />
+    <parent
+      link="link3" />
+    <child
+      link="link4" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="link5">
+    <inertial>
+      <origin
+        xyz="-0.0062473 -6.6404E-05 1.7204E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.006847" />
+      <inertia
+        ixx="4.1054E-07"
+        ixy="-5.1372E-09"
+        ixz="-4.5044E-23"
+        iyy="8.9379E-07"
+        iyz="-1.6104E-23"
+        izz="8.1974E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint5"
+    type="revolute">
+    <origin
+      xyz="-0.060128 -0.00063912 0"
+      rpy="0 0 0" />
+    <parent
+      link="link4" />
+    <child
+      link="link5" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="left_tooth">
+    <inertial>
+      <origin
+        xyz="-0.0075942 -8.072E-05 1.5613E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00047508" />
+      <inertia
+        ixx="4.2388E-09"
+        ixy="-5.13E-11"
+        ixz="1.7893E-23"
+        iyy="9.0645E-09"
+        iyz="4.9457E-26"
+        izz="1.2591E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/left_tooth.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/left_tooth.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_tooth_joint"
+    type="prismatic">
+    <origin
+      xyz="-0.023867 -0.0002705 -0.013428"
+      rpy="0 0 0" />
+    <parent
+      link="link5" />
+    <child
+      link="left_tooth" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0.015"
+      effort="5"
+      velocity="0.01" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="right_tooth">
+    <inertial>
+      <origin
+        xyz="-0.0075942 8.072E-05 -1.5613E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00045288" />
+      <inertia
+        ixx="4.0407E-09"
+        ixy="4.8902E-11"
+        ixz="-1.662E-23"
+        iyy="8.6409E-09"
+        iyz="2.8842E-25"
+        izz="1.2002E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/right_tooth.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_sim/meshes/right_tooth.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_tooth_joint"
+    type="prismatic">
+    <origin
+      xyz="-0.023867 -0.0002705 0.013419"
+      rpy="3.1416 0 0" />
+    <parent
+      link="link5" />
+    <child
+      link="right_tooth" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0.015"
+      effort="5"
+      velocity="0.01" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
   </joint>
 
-  <!-- ===== ros2_control: declares joint's interfaces ===== -->
+<!-- ===== ros2_control: declares joint's interfaces ===== -->
   <ros2_control name="GazeboSystem" type="system">
     <hardware>
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
@@ -187,8 +490,8 @@
 
     <joint name="joint1">
       <command_interface name="position">
-        <param name="min">${-pi/2}</param>
-        <param name="max">${pi/2}</param>
+        <param name="min">${-pi}</param>
+        <param name="max">${pi}</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -215,7 +518,7 @@
       <state_interface name="effort"/>
     </joint>
 
-    <joint name="gripper_joint">
+    <joint name="joint4">
       <command_interface name="position">
         <param name="min">${-pi/2}</param>
         <param name="max">${pi/2}</param>
@@ -224,6 +527,37 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
+
+    <joint name="joint5">
+      <command_interface name="position">
+        <param name="min">${-pi/2}</param>
+        <param name="max">${pi/2}</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="left_tooth_joint">
+      <command_interface name="position">
+        <param name="min">0</param>
+        <param name="max">0.015</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="right_tooth_joint">
+      <command_interface name="position">
+        <param name="min">0</param>
+        <param name="max">0.015</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
   </ros2_control>
 
   <!-- ===== Gazebo plugin: starts controller_manager, loads the yaml ===== -->
@@ -232,6 +566,7 @@
       <parameters>$(find arm_sim)/config/controllers.yaml</parameters>
     </plugin>
   </gazebo>
+
 
   <!-- ===== Gazebo colors ===== -->
   <gazebo reference="base_link">
@@ -246,8 +581,26 @@
   <gazebo reference="link3">
     <material>Gazebo/Green</material>
   </gazebo>
-  <gazebo reference="gripper">
+  <gazebo reference="link4">
     <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="left_tooth">
+    <material>Gazebo/Yellow</material>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.0</maxVel>
+  </gazebo>
+  <gazebo reference="right_tooth">
+    <material>Gazebo/Green</material>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.0</maxVel>
   </gazebo>
 
 </robot>

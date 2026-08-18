@@ -16,6 +16,7 @@ setup(
         (os.path.join('share',package_name, 'urdf'),glob('urdf/*')),
         (os.path.join('share',package_name, 'config'),glob('config/*')),
         (os.path.join('share',package_name, 'meshes'),glob('meshes/*')),
+        (os.path.join('share',package_name, 'models'),glob('models/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,7 +31,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'arm_controller = arm_sim.arm_controller:main'
+            'arm_controller = arm_sim.arm_controller:main',
+            'arm_controller_ik = arm_sim.arm_controller_ik:main',
+            'arm_controller_key_ik = arm_sim.arm_controller_key_ik:main'
         ],
     },
 )
